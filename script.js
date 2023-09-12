@@ -73,3 +73,4 @@ function resetEvent() {
     currentQuestion = 0;
     showQuestion();
 }
+// future  de limitador de tentativas...
