@@ -8,6 +8,9 @@ function showQuestion() {
     if(questions[currentQuestion]) {
         let q = questions[currentQuestion];
 
+        //calculo da barra de respostas
+        let pct = Math.floor((currentQuestion / questions.length) * 100);
+        document.querySelector('.progress--bar').style.width = `${pct}%`;
 
         document.querySelector('.scoreArea').style.display = 'none';
         document.querySelector('.questionArea').style.display = 'block';
@@ -22,9 +25,8 @@ function showQuestion() {
         document.querySelectorAll('.options .option').forEach(item => {
             item.addEventListener('click', optionClickEvent);
         });
-        // console.log(q.question);
     } else {
-        // acabaram as questões
+        finishQuiz();
     }
 }
 
@@ -38,4 +40,15 @@ function optionClickEvent(e) {
     
     currentQuestion++;
     showQuestion();
+}
+
+function finishQuiz() {
+    let points = Math.floor((correctAnswers / questions.length) * 100);
+
+    document.querySelector('.scorePct').innerHTML = `Acertou ${points}%`;
+    document.querySelector('.scoreText2').innerHTML = `Você respondeu ${questions.length} questões e Acertou ${correctAnswers}`;
+
+    document.querySelector('.scoreArea').style.display = 'block';
+    document.querySelector('.questionArea').style.display = 'none';
+    document.querySelector('.progress--bar').style.width = '100%';
 }
