@@ -4,6 +4,10 @@ let correctAnswers = 0;
 showQuestion();
 
 
+// events
+document.querySelector('.scoreArea button').addEventListener('click', resetEvent);
+
+
 function showQuestion() {
     if(questions[currentQuestion]) {
         let q = questions[currentQuestion];
@@ -45,10 +49,27 @@ function optionClickEvent(e) {
 function finishQuiz() {
     let points = Math.floor((correctAnswers / questions.length) * 100);
 
+    if(points < 60) {
+        document.querySelector('.scoreText1').innerHTML = 'reprovado!';
+        document.querySelector('.scorePct').style.color = '#FF0000';
+    } else if(points >= 60 && points < 70) {
+        document.querySelector('.scoreText1').innerHTML = 'Aprovado!';
+        document.querySelector('.scorePct').style.color = '#FFF000'; 
+    } else if(points >= 70) {
+        document.querySelector('.scoreText1').innerHTML = 'Parabéns Aprovado!';
+        document.querySelector('.scorePct').style.color = '#0D630D'; 
+    }
+
     document.querySelector('.scorePct').innerHTML = `Acertou ${points}%`;
-    document.querySelector('.scoreText2').innerHTML = `Você respondeu ${questions.length} questões e Acertou ${correctAnswers}`;
+    document.querySelector('.scoreText2').innerHTML = `Você respondeu ${questions.length} questões e Acertou ${correctAnswers}.`;
 
     document.querySelector('.scoreArea').style.display = 'block';
     document.querySelector('.questionArea').style.display = 'none';
     document.querySelector('.progress--bar').style.width = '100%';
+}
+
+function resetEvent() {
+    correctAnswers = 0;
+    currentQuestion = 0;
+    showQuestion();
 }
