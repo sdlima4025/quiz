@@ -1,6 +1,6 @@
 // inicial data
 let currentQuestion = 0;
-
+let correctAnswers = 0;
 showQuestion();
 
 
@@ -32,10 +32,10 @@ function optionClickEvent(e) {
     let clickOption = parseInt(e.target.getAttribute('data-op'));
 
     if(questions[currentQuestion].answer === clickOption) {
-        console.log("ACERTOU!");
-    } else {
+        correctAnswers++;
 
-        console.log("ERROU!");
     }
-    // console.log("Clicou em:", e.target.getAttribute('data-op'));
+    
+    currentQuestion++;
+    showQuestion();
 }
